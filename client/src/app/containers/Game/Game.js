@@ -33,7 +33,12 @@ class Game extends React.Component {
   }
 
   newGame = () => {
+    const { players } = this.state;
     this.clearCards();
+
+    // let deck = new Deck()
+    // deck.generate();
+    // deck.deal(); // returns a list middle, player1, player2, player3
 
     const {deck, players, middle } = deal(generateDeck(), this.state.players)
 
