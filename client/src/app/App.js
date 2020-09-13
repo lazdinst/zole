@@ -1,5 +1,5 @@
 import React from 'react';
-import Game from './containers/Game/Game.js';
+import Game from './containers/Game';
 
 import './App.css';
 

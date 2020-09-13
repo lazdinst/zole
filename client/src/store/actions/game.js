@@ -1,10 +1,46 @@
 import TYPES from '../types';
-import axios from 'axios';
 
 /** ============================================================
  * Simple Dispatches
  * ========================================================== */
 
-export const updateGame = (name, state) => ({
-  type: TYPES.GAME_STATE,
+export const setGameState = (state, msg) => ({
+  type: TYPES.SET_GAME_STATE,
+  state: state,
+  msg: msg,
 });
+
+export const setMatchCount = m => ({
+  type: TYPES.SET_MATCH_COUNT,
+  matchCount: m,
+});
+
+export const setRound = r => ({
+  type: TYPES.SET_ROUND,
+  round: r,
+});
+
+export const setDealer = id => ({
+  type: TYPES.SET_DEALER,
+  dealer: id,
+});
+
+export const setCenterDeal = cards => ({
+  type: TYPES.SET_CENTER_DEAL,
+  center: cards,
+});
+
+export const updateRoundQueue = roundQueue => ({
+  type: TYPES.UPDATE_ROUND_QUEUE,
+  roundQueue: roundQueue,
+})
+
+export const updateDealerQueue = dealerQueue => ({
+  type: TYPES.UPDATE_DEALER_QUEUE,
+  dealerQueue: dealerQueue,
+})
+
+export const setPlayerCount = playerCount => ({
+  type: TYPES.SET_PLAYER_COUNT,
+  playerCount: playerCount,
+})

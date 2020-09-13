@@ -1,0 +1,3 @@
+export default {
+  UPDATE_TEAM_POINTS: 'UPDATE_TEAM_POINTS',
+}
