@@ -9,8 +9,3 @@ export const setPlayerCards = (id, cards) => ({
   id: id,
   cards: cards,
 })
-
-export const setPlayerTurn = id => ({
-  type: TYPES.SET_PLAYER_TURN,
-  turn: id,
-});

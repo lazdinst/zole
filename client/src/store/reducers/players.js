@@ -45,18 +45,6 @@ export default (state = initialState, action) => {
         }
       }
 
-    case TYPES.SET_PLAYER_TURN:
-
-      return {
-        ...state,
-        players: {
-          ...state.players,
-          [action.id]: {
-            ...state.players[action.id],
-            turn: action.turn,
-          }
-        }
-      }
     default:
       return state;
   }

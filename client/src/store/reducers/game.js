@@ -10,7 +10,8 @@ const initialState = {
   round: 0,
   matchCount: 0,
   center: null,
-  turn: null,
+  turn: 0,
+  big: 0,
   dealerQueue: [0,1,2],
   roundQueue: [1,2,0],
   playerCount: 3,
@@ -37,6 +38,12 @@ export default (state = initialState, action) => {
         dealer: action.dealer,
       };
 
+    case TYPES.SET_BIG:
+      return {
+        ...state,
+        big: action.id,
+      };
+
     case TYPES.SET_MATCH_COUNT:
       return {
         ...state,
@@ -48,6 +55,12 @@ export default (state = initialState, action) => {
         ...state,
         round: action.round,
       };
+
+    case TYPES.SET_TURN:
+      return {
+        ...state,
+        turn: action.turn,
+      }
 
     case TYPES.SET_CENTER_DEAL:
       return {

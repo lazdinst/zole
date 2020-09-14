@@ -20,9 +20,19 @@ export const setRound = r => ({
   round: r,
 });
 
+export const setBig = id => ({
+  type: TYPES.SET_BIG,
+  id: id,
+});
+
 export const setDealer = id => ({
   type: TYPES.SET_DEALER,
   dealer: id,
+});
+
+export const setTurn = id => ({
+  type: TYPES.SET_TURN,
+  turn: id,
 });
 
 export const setCenterDeal = cards => ({

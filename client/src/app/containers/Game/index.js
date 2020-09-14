@@ -15,6 +15,7 @@ import {
   updateRoundQueue,
   setRound,
   updateDealerQueue,
+  setTurn,
 } from '../../../store/actions/game';
 
 import { 
@@ -84,25 +85,6 @@ class Game extends React.Component {
     }
   }
 
-  // selectDealer = () => {
-  //   const { 
-  //     dealer, 
-  //     setDealer, 
-  //     playerCount,
-  //     dealerQueue,
-  //   } = this.props;
-
-  //   if(dealer === null) {
-  //     setDealer(0);
-  //   } else {
-  //     if(dealer === (playerCount - 1)) {
-  //       setDealer(0);
-  //     } else {
-  //       setDealer(dealer + 1);
-  //     }
-  //   }
-  // }
-
   setPlayerCount = () => {
     const { setPlayerCount } = this.props;
     setPlayerCount(3);
@@ -113,7 +95,7 @@ class Game extends React.Component {
       playerCount, 
       updateRoundQueue,
       setDealer,
-      setPlayerTurn,
+      setTurn,
     } = this.props;
 
     let queue = [];
@@ -123,15 +105,19 @@ class Game extends React.Component {
     }
     updateDealerQueue(queue);
     
-    let dealer = queue.shift();
+    let dealer = [...queue].shift();
     setDealer(dealer);
+    console.log(queue)
 
     queue = this.incrementRoundQueue(queue);
     updateRoundQueue(queue);
 
-    let playerTurn = queue.shift();
-    
-    setPlayerTurn(playerTurn);
+    let playerTurn = [...queue].shift();
+
+    // YOU ARE IN THE MIDDLE OF DSETTING THE TURN,
+    // you screwed up and put it all on the players actions
+    // you have game.turn already in the reducer, make an action and set turn
+    setTurn(playerTurn);
   }
 
   incrementRoundQueue = queue => {
@@ -146,16 +132,21 @@ class Game extends React.Component {
       round,
       setRound,
     } = this.props;
+
     setRound(round + 1);
+    setGameState('S6', 'Start Round');
   }
 
   render() {
     const { round } = this.props;
-
+    let suits = ['♣', '♠', '♥', '♦'];
+    let values = ['A', '7', '8', '9', '10', 'J', 'Q', 'K'];
     return (
       <>
         <header>Zole Game</header>
         <div>Round: {round}</div>
+        <div style={{display: 'flex', justifyContent: 'center', fontSize: '2rem'}}>{suits.map(suit => <div style={{width: '1.5rem'}}>{suit}</div>)}</div>
+        <div style={{display: 'flex', justifyContent: 'center', fontSize: '2rem'}}>{values.map(value => <div style={{width: '1.5rem'}}>{value}</div>)}</div>
         <button onClick={this.newGame}>New Game</button>
         <hr/>
           <Board />
@@ -184,7 +175,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   setPlayerCards,
   updateRoundQueue,
   updateDealerQueue,
-  setPlayerTurn,
+  setTurn,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

@@ -1,34 +1,49 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import ChooseBig from '../PlayerActions/ChooseBig';
 import Cards from '../Cards';
 
+const style = {
+  textAlign: 'left',
+  margin: '1rem',
+}
 
-const PlayerRow = props => {
-  const { player, isDealer } = props;
+const indicators = {
+  height: '0.5rem',
+}
+const turnStyle = {
+  ...indicators,
+  backgroundColor: 'green'
+}
 
-  const style = {
-    textAlign: 'left',
-    margin: '1rem',
+
+const PlayerListRow = props => {
+  const { 
+    player, 
+    id,
+    turn, 
+    state, 
+    dealer,
+  } = props;
+
+  const isDealer = id === dealer.toString();
+  const isTurn = id === turn.toString();
+  const getStateActions = state => {
+    switch(state) {
+      case 'S6':
+        return <ChooseBig id={id} />;
+      
+      default:
+        return [];
+    }
   }
 
-  const nameStyle = {
-    fontWeight: isDealer ? 'bold' : 'normal',
-    fontSize: '1.25rem',
-  }
 
-  const indicators = {
-    height: '0.5rem',
-  }
-  const dealerStyle = {
-    ...indicators,
-    backgroundColor: 'gold'
-  }
-
-  const turnStyle = {
-    ...indicators,
-    backgroundColor: 'green'
-  }
-
-  const { name, points, team, cards, turn } = player;
+  const actionButtons = isTurn ? getStateActions(state) : [<div>Waiting for Other Players</div>];
+  
+  const { name, points, team, cards } = player;
 
   return (
     <div style={style}>
@@ -37,7 +52,8 @@ const PlayerRow = props => {
       </div>
       <div>Score: {points !== undefined ? points : 'PLAYER_SCORE'}</div>
       <div>Team: {team || 'PLAYER_TEAM'}</div>
-      <div style={turn ? turnStyle : indicators}></div>
+      <div style={isTurn ? turnStyle : indicators}></div>
+      <div>{ actionButtons }</div>
       <div>
         <header>Cards: </header>
         <Cards cards={cards} />
@@ -46,5 +62,13 @@ const PlayerRow = props => {
   );
 }
 
-export default PlayerRow;
+const mapStateToProps = state => ({
+  dealer: state.game.dealer,
+  turn: state.game.turn,
+  state: state.game.state,
+});
 
+const mapDispatchToProps = dispatch => bindActionCreators({
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerListRow);
