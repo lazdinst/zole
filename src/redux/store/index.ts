@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { loadPlannerState, loadUIState, loadThemeState } from '../utils';
+import { loadUIState } from '../utils';
 
 import * as reducers from '../slices';
 import {
@@ -10,15 +10,9 @@ import {
 } from '../middleware';
 
 function getPreloadedState() {
-  const loadedPlannerState = loadPlannerState();
   const loadedUIState = loadUIState();
-  const loadedThemeState = loadThemeState();
   return {
-    planner: {
-      ...loadedPlannerState,
-    },
     ui: loadedUIState,
-    theme: loadedThemeState,
   };
 }
 

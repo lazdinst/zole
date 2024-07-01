@@ -1,16 +1,3 @@
-export function loadPlannerState() {
-  try {
-    const serializedState = localStorage.getItem('planner');
-    if (serializedState === null) {
-      return undefined;
-    }
-    return JSON.parse(serializedState);
-  } catch (err) {
-    console.error('Failed to load planner state from localStorage', err);
-    return undefined;
-  }
-}
-
 export function loadUIState() {
   try {
     const serializedState = localStorage.getItem('ui');
