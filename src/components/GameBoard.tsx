@@ -9,33 +9,11 @@ import {
   dealCards,
 } from '../redux/slices/game';
 import Card from './Card';
+import GameLayout from './GameLayout';
 import styled from 'styled-components';
 
-const GameBoardContainer = styled.div`
+const CardArea = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const PlayerRow = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 10px 0;
-
-  &:nth-child(1) {
-    margin-bottom: 20px;
-  }
-
-  &:nth-child(3) {
-    margin-top: 20px;
-  }
-`;
-
-const TrickRow = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
 `;
 
 const GameBoard: React.FC = () => {
@@ -70,48 +48,38 @@ const GameBoard: React.FC = () => {
 
   const handleDealCards = () => {
     dispatch(dealCards());
+    // need to set current player to the player 1
   };
 
+  const playerComponents = players.map((player) => (
+    <div key={player.id}>
+      <h2>{player.name}</h2>
+      <CardArea>
+        {player.hand.map((card) => (
+          <Card
+            key={card.suit + card.rank}
+            suit={card.suit}
+            rank={card.rank}
+            onClick={() => handlePlayCard(player.id, card)}
+          />
+        ))}
+      </CardArea>
+    </div>
+  ));
+
+  const currentTrickComponent = (
+    <div>
+      <h2>Current Trick</h2>
+      {currentTrick.map((card) => (
+        <Card key={card.suit + card.rank} suit={card.suit} rank={card.rank} />
+      ))}
+    </div>
+  );
+
   return (
-    <GameBoardContainer>
-      <h1>Game Board</h1>
+    <GameLayout players={playerComponents} currentTrick={currentTrickComponent}>
       <button onClick={handleDealCards}>Deal Cards</button>
-      <PlayerRow>
-        {players[0]?.hand.map((card) => (
-          <Card
-            key={card.suit + card.rank}
-            suit={card.suit}
-            rank={card.rank}
-            onClick={() => handlePlayCard(players[0].id, card)}
-          />
-        ))}
-      </PlayerRow>
-      <TrickRow>
-        {currentTrick.map((card) => (
-          <Card key={card.suit + card.rank} suit={card.suit} rank={card.rank} />
-        ))}
-      </TrickRow>
-      <PlayerRow>
-        {players[1]?.hand.map((card) => (
-          <Card
-            key={card.suit + card.rank}
-            suit={card.suit}
-            rank={card.rank}
-            onClick={() => handlePlayCard(players[1].id, card)}
-          />
-        ))}
-      </PlayerRow>
-      <PlayerRow>
-        {players[2]?.hand.map((card) => (
-          <Card
-            key={card.suit + card.rank}
-            suit={card.suit}
-            rank={card.rank}
-            onClick={() => handlePlayCard(players[2].id, card)}
-          />
-        ))}
-      </PlayerRow>
-    </GameBoardContainer>
+    </GameLayout>
   );
 };
 
