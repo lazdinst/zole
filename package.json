@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "name": "zole-monorepo",
+  "version": "1.0.0",
+  "workspaces": [
+    "client",
+    "server",
+    "shared"
+  ]
+}
