@@ -1,27 +1,17 @@
 import express from 'express';
-import cors from 'cors';
-import { Card } from '@zole/shared/types';
+import { createServer } from 'http';
+import { setupSocketServer } from './socket/socketServer';
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
-app.use(express.json());
+const httpServer = createServer(app);
+setupSocketServer(httpServer); // attach socket server
 
-app.get('/', (req, res) => {
-  res.send('Zole Game Server');
+app.get('/', (_req, res) => {
+  res.send('Zole Game Server is running');
 });
 
-// ✅ Test route using shared type
-app.get('/test-card', (req, res) => {
-  const card: Card = {
-    suit: 'hearts',
-    rank: 'J',
-  };
-
-  res.json(card);
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+httpServer.listen(port, () => {
+  console.log(`🚀 HTTP + WS server running on port ${port}`);
 });
