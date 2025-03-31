@@ -1,5 +1,4 @@
-import { Card, Player, PlayerState, GameState } from '@zole/shared';
-import { generateDeck, shuffle } from './utils/shuffle';
+import { PlayerState, GameState, Card } from '@zole/shared';
 
 export class Game {
   private id: string;
@@ -9,18 +8,11 @@ export class Game {
 
   constructor(id: string) {
     this.id = id;
-    this.deck = shuffle(generateDeck());
   }
 
-  addPlayer(basePlayer: Player): void {
-    const playerState: PlayerState = {
-      ...basePlayer,
-      hand: [],
-      roundScore: 0,
-      gameScore: 0,
-    };
-
-    this.players.push(playerState);
+  addPlayer(player: PlayerState): void {
+    // Add a player to the game
+    this.players.push(player);
   }
 
   getPlayerCount(): number {
@@ -29,23 +21,16 @@ export class Game {
 
   dealCards(): void {
     if (this.dealt || this.players.length !== 3) return;
-
-    const handSize = 8;
-    for (let i = 0; i < this.players.length; i++) {
-      this.players[i].hand = this.deck.slice(i * handSize, (i + 1) * handSize);
-    }
-
+    // Dealing logic here...
     this.dealt = true;
   }
 
   getState(): GameState {
     return {
       gameId: this.id,
+      players: this.players,
       deck: this.deck,
       playedCards: [],
-      players: this.players,
-      currentTurnPlayerId: this.players[0]?.id || '',
-      deckSize: this.deck.length,
     };
   }
 }
