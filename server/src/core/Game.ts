@@ -1,4 +1,4 @@
-import { Card, Player, PlayerState, GameState } from '@zole/shared/types';
+import { Card, Player, PlayerState, GameState } from '@zole/shared';
 import { generateDeck, shuffle } from './utils/shuffle';
 
 export class Game {

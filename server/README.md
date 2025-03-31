@@ -96,3 +96,7 @@ This document outlines the server-side folder structure and explains the purpose
 Always keep the game logic decoupled from delivery mechanism.
 Test it like a library. Use it like a service.
 ```
+
+## Socket Testing
+
+`chmod +x run-socket-test.sh`

@@ -1,13 +1,19 @@
-import { GameState } from '@zole/shared';
+import {
+  GameState,
+  GAME_CREATE,
+  GAME_JOIN,
+  GAME_CREATED,
+  GAME_STATE,
+} from '@zole/shared';
 
 export type ClientToServerEventMap = {
-  'game:create': { playerName: string; sessionToken: string };
-  'game:join': { gameId: string; playerName: string; sessionToken: string };
+  [GAME_CREATE]: { playerName: string; sessionToken: string };
+  [GAME_JOIN]: { gameId: string; playerName: string; sessionToken: string };
 };
 
 export type ServerToClientEventMap = {
-  game_created: { gameId: string; playerId: string; state: GameState };
-  game_state: { state: GameState };
+  [GAME_CREATED]: { gameId: string; playerId: string; state: GameState };
+  [GAME_STATE]: { state: GameState };
 };
 
 export type IncomingMessage = {

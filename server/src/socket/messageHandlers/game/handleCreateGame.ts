@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import { joinGame } from '../../../core/actions/joinGame';
 import { Socket } from 'socket.io';
-import { Player } from '@zole/shared';
+import { Player, GAME_CREATED } from '@zole/shared';
 import { getOrCreatePlayerId } from '../../../auth/sessionManager';
 import { gameManager } from '../../../core/GameManagerInstance';
 
@@ -21,9 +21,11 @@ export function handleCreateGame(
   const game = gameManager.createGame(gameId);
   joinGame(game, player);
 
-  socket.emit('game:created', {
+  socket.emit(GAME_CREATED, {
     gameId,
     playerId,
     state: game.getState(),
   });
 }
+
+export default handleCreateGame;

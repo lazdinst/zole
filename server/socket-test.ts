@@ -7,15 +7,24 @@ const socket = io(SOCKET_URL);
 socket.on('connect', () => {
   console.log('Connected to WebSocket server!');
 
-  // Send a test message after connecting
-  socket.emit('test-message', { message: 'Hello from the test client!' });
+  socket.emit('game:check'); // Check if any games exist
 
   // Send a game:create event after connecting
   socket.emit('game:create', { playerName: 'Player1', sessionToken: '123abc' });
 });
 
-socket.on('test-response', (data) => {
-  console.log('Received response from server:', data);
+// Listen for the existing games response
+socket.on('game:existing', (data) => {
+  if (data && data.games && data.games.length > 0) {
+    console.log('Existing games:', data.games);
+    // You can choose to join the first game or handle it differently
+  } else {
+    console.log('No existing games found, creating a new one...');
+    socket.emit('game:create', {
+      playerName: 'Player1',
+      sessionToken: '123abc',
+    });
+  }
 });
 
 // Listen for the game:create response (game created)

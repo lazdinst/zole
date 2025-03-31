@@ -1,7 +1,7 @@
 import { Socket } from 'socket.io';
 import { gameManager } from '../../../core/GameManagerInstance';
 import { getOrCreatePlayerId } from '../../../auth/sessionManager';
-import { Player } from '@zole/shared';
+import { GAME_STATE, Player } from '@zole/shared';
 import { joinGame } from '../../../core/actions/joinGame';
 
 export function handleJoinGame(
@@ -20,5 +20,6 @@ export function handleJoinGame(
   const game = gameManager.getOrCreateGame(gameId);
   const state = joinGame(game, player);
 
-  socket.emit('game_state', { state });
+  socket.emit(GAME_STATE, { state });
 }
+export default handleJoinGame;
