@@ -1,14 +1,7 @@
-import { Card, SUITS, RANKS } from '@zole/shared';
+import { Card, ZOLE_CARDS } from '@zole/shared';
 
 export function generateDeck(): Card[] {
-  const deck: Card[] = [];
-
-  for (const suit of SUITS) {
-    for (const rank of RANKS) {
-      deck.push({ suit, rank });
-    }
-  }
-
+  const deck: Card[] = [...ZOLE_CARDS];
   return deck;
 }
 

@@ -1,5 +1,5 @@
 import { Socket } from 'socket.io';
-import { gameManager } from '../../../core/GameManagerInstance';
+import { gameManager } from '../../../core/state/instances/GameManagerInstance';
 import { GAME_EXISTING } from '@zole/shared';
 
 export function handleCheckGames(socket: Socket) {

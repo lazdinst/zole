@@ -13,11 +13,6 @@ export class GameManager {
     return game;
   }
 
-  getOrCreateGame(gameId: string): Game {
-    const existing = this.getGame(gameId);
-    return existing ?? this.createGame(gameId);
-  }
-
   hasGame(gameId: string): boolean {
     return this.games.has(gameId);
   }

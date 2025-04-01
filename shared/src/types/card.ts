@@ -6,4 +6,7 @@ export type Rank = (typeof RANKS)[number];
 export interface Card {
   suit: Suit;
   rank: Rank;
+  isTrump: boolean;
+  points: number;
+  strength: number;
 }

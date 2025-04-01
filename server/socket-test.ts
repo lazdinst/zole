@@ -8,7 +8,6 @@ socket.on('connect', () => {
   console.log('Connected to WebSocket server!');
 
   socket.emit('game:check'); // Check if any games exist
-  socket.emit('game:check'); // Check if any games exist
 
   // Send a game:create event after connecting
   socket.emit('game:create', { playerName: 'Player1', sessionToken: '123abc' });
