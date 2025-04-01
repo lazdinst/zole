@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
+    "target": "ES2020", // Use modern JS features (e.g. optional chaining)
+    "module": "ES2022", // Use native `import`/`export`
+    "moduleResolution": "node", // Properly resolves `node_modules`
     "strict": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true, // Allows importing CommonJS packages
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "baseUrl": "./src", // Optional: helps with path aliases
+    "resolveJsonModule": true,
+    "types": ["node"]
   },
   "include": ["src"]
 }

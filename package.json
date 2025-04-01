@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "zole-monorepo",
+  "version": "1.0.0",
+  "workspaces": [
+    "client",
+    "server",
+    "shared"
+  ],
+  "scripts": {
+    "server": "cd server && npm run start",
+    "client": "cd client && npm run dev",
+    "build:shared": "cd shared && npm run build",
+    "socket:client": "cd server && ./run-socket-test.sh"
+  }
+}
