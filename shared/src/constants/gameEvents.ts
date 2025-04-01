@@ -1,0 +1,13 @@
+export const GAME_CREATE = "game:create";
+export const GAME_JOIN = "game:join";
+export const GAME_CREATED = "game:created";
+export const GAME_JOINED = "game:joined";
+export const GAME_CHECKED = "game:existing";
+export const GAME_STATE = "game:state";
+export const GAME_ERROR = "game:error";
+export const GAME_DISCONNECTED = "game:disconnected";
+export const GAME_RECONNECTED = "game:reconnected";
+export const GAME_EXISTING = "game:existing";
+export const GAME_START = "game:start";
+export const GAME_END = "game:end";
+export const GAME_UPDATE = "game:update";
