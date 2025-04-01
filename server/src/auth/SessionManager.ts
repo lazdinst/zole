@@ -23,7 +23,7 @@ export class SessionManager {
     const now = Date.now();
     let player = null;
 
-    if (!sessionToken || !this.sessions.has(sessionToken)) {
+    if (!sessionToken || !this.validateSession(sessionToken)) {
       sessionToken = generateSessionToken();
       player = this.createPlayerInstance(name, sessionToken).getState();
     } else {
