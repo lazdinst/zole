@@ -1,7 +1,11 @@
 import { Socket } from 'socket.io';
 import { ClientToServerEventMap } from './events';
-import { handleCreateGame, handleJoinGame } from './messageHandlers';
-import { GAME_CREATE, GAME_JOIN } from '@zole/shared';
+import {
+  handleCreateGame,
+  handleJoinGame,
+  handleRegisterPlayer,
+} from './messageHandlers';
+import { GAME_CREATE, GAME_JOIN, PLAYER_REGISTER } from '@zole/shared';
 
 type MessageHandlerMap = {
   [K in keyof ClientToServerEventMap]: (
@@ -12,5 +16,6 @@ type MessageHandlerMap = {
 
 export const messageHandlers: MessageHandlerMap = {
   [GAME_CREATE]: handleCreateGame,
+  [PLAYER_REGISTER]: handleRegisterPlayer,
   [GAME_JOIN]: handleJoinGame,
 };

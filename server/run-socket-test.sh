@@ -24,7 +24,7 @@ colorize_message() {
 colorize_message "blue" "Running the socket test script..."
 
 # Run the socket test script and capture the exit status
-if ! npx tsx socket-test.ts; then
+if ! npx tsx src/socket-test.ts; then
   # If the command fails, print the failure message in red
   colorize_message "red" "Command failed: socket-test.ts script did not execute successfully."
 else

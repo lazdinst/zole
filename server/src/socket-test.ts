@@ -1,4 +1,5 @@
 import { io } from 'socket.io-client';
+import { PLAYER_REGISTER, PLAYER_REGISTERED } from '@zole/shared';
 
 const SOCKET_URL = 'http://localhost:5000'; // Your WebSocket server URL
 
@@ -7,10 +8,14 @@ const socket = io(SOCKET_URL);
 socket.on('connect', () => {
   console.log('Connected to WebSocket server!');
 
-  socket.emit('game:check'); // Check if any games exist
+  socket.emit(PLAYER_REGISTER, {
+    playerName: 'Player1',
+  });
+
+  // socket.emit('game:check'); // Check if any games exist
 
   // Send a game:create event after connecting
-  socket.emit('game:create', { playerName: 'Player1', sessionToken: '123abc' });
+  // socket.emit('game:create', { playerName: 'Player1', sessionToken: '123abc' });
 });
 
 // Listen for the existing games response
@@ -36,6 +41,10 @@ socket.on('game:created', (data) => {
 // Listen for the game:join response (just for testing)
 socket.on('game:joined', (data) => {
   console.log('Game joined response:', data);
+});
+
+socket.on(PLAYER_REGISTERED, (data) => {
+  console.log('Player registered:', data);
 });
 
 socket.on('disconnect', () => {
