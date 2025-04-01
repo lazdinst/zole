@@ -8,6 +8,8 @@
     "shared"
   ],
   "scripts": {
+    "server": "cd server && npm run start",
+    "client": "cd client && npm run dev",
     "build:shared": "cd shared && npm run build",
     "socket:client": "cd server && ./run-socket-test.sh"
   }
