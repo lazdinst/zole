@@ -6,5 +6,8 @@
     "client",
     "server",
     "shared"
-  ]
+  ],
+  "scripts": {
+    "build:shared": "cd shared && npm run build"
+  }
 }
