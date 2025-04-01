@@ -71,8 +71,7 @@ export class SessionManager {
     this.sessions.delete(sessionToken);
   }
 
-  // Generate a unique player ID
-  private generatePlayerId(): string {
-    return `player_${Math.random().toString(36).substr(2, 9)}`;
+  getSessions(): Map<string, { player: PlayerType; lastActivity: number }> {
+    return this.sessions;
   }
 }

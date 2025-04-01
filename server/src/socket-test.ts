@@ -1,4 +1,5 @@
 import { io } from 'socket.io-client';
+import { nanoid } from 'nanoid';
 import { PLAYER_REGISTER, PLAYER_REGISTERED } from '@zole/shared';
 
 const SOCKET_URL = 'http://localhost:5000'; // Your WebSocket server URL
@@ -9,7 +10,7 @@ socket.on('connect', () => {
   console.log('Connected to WebSocket server!');
 
   socket.emit(PLAYER_REGISTER, {
-    playerName: 'Player1',
+    name: `Player-${nanoid(4)}`,
   });
 
   // socket.emit('game:check'); // Check if any games exist
