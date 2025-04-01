@@ -8,6 +8,7 @@
     "shared"
   ],
   "scripts": {
-    "build:shared": "cd shared && npm run build"
+    "build:shared": "cd shared && npm run build",
+    "socket:client": "cd server && ./run-socket-test.sh"
   }
 }
